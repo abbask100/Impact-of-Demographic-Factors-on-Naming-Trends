@@ -1,0 +1,63 @@
+---
+title: "Impact of demographic factors on naming trends"
+output: word_document
+date: "2024-02-28"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data importation
+
+```{r}
+mydata<-read.csv("C:\\Users\\Administrator\\Desktop\\Popular_Baby_Names_20240228.csv")
+head(mydata)
+```
+
+## Checking for missing values
+
+```{r}
+sum(is.na(mydata))
+```
+## Summary statistics
+
+## Distribution of Gender
+
+```{r}
+library(ggplot2)
+ggplot(mydata, aes(x = Gender)) +
+  geom_bar(fill="blue") +
+  labs(title = "Distribution of Gender",
+       x = "Gender",
+       y = "Count") 
+```
+## Distribution Participants of Ethnicity
+
+```{r}
+ggplot(mydata, aes(y = Ethnicity)) +
+  geom_bar(fill="blue") +
+  labs(title = "Distribution Participants of Ethnicity",
+       x = "Ethnicity",
+       y = "Count")
+```
+
+## ANOVA
+
+```{r}
+a<-aov(Count~Ethnicity, data = mydata)
+summary(a)
+```
+
+## T-test
+
+```{r}
+t.test(Count~Gender, data=mydata)
+```
+
+## Chi-square test
+
+```{r}
+chisq.test(Year.of.Birth, Child.s.First.Name)
+```
+
